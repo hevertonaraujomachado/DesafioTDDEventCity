@@ -1,0 +1,4 @@
+package com.devsuperior.bds02.controllers.exceptions;
+
+public class FieldMessage {
+}
