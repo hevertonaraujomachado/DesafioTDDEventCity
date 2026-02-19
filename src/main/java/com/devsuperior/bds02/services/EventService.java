@@ -9,6 +9,8 @@ import com.devsuperior.bds02.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +22,23 @@ public class EventService {
     @Autowired
     private CityRepository cityRepository;
 
+
+    public Page<EventDTO> findAllPaged(Pageable pageable) {
+        Page<Event> page = repository.findAll(pageable);
+        return page.map(EventDTO::new);
+    }
+
 @Transactional
     public EventDTO findById(Long id) {
         Event entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id not found"));
+        return new EventDTO(entity);
+    }
+    @Transactional
+    public EventDTO insert(EventDTO dto) {
+        Event entity = new Event();
+        copyDtoToEntity(dto, entity);
+        entity = repository.save(entity);
         return new EventDTO(entity);
     }
 
@@ -38,25 +53,15 @@ public class EventService {
         catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
         }
+
     }
 
     private void copyDtoToEntity(EventDTO dto, Event entity) {
+        entity.setName(dto.getName());
+        entity.setDate(dto.getDate());
+        entity.setUrl(dto.getUrl());
 
-        if (dto.getName() != null) {
-            entity.setName(dto.getName());
-        }
-
-        if (dto.getDate() != null) {
-            entity.setDate(dto.getDate());
-        }
-
-        if (dto.getUrl() != null) {
-            entity.setUrl(dto.getUrl());
-        }
-
-        if (dto.getCityId() != null) {
-            City city = cityRepository.getReferenceById(dto.getCityId());
-            entity.setCity(city);
-        }
+        City city = cityRepository.getReferenceById(dto.getCityId());
+        entity.setCity(city);
     }
 }

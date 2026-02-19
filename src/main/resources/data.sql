@@ -1,11 +1,12 @@
-INSERT INTO tb_role(id,authority) VALUES (1,'ROLE_ADMIN');
-INSERT INTO tb_role(id,authority) VALUES (2,'ROLE_CLIENT');
+INSERT INTO tb_role(authority) VALUES ('ROLE_ADMIN');
+INSERT INTO tb_role(authority) VALUES ('ROLE_CLIENT');
+INSERT INTO tb_user(name,email,password)
+VALUES ('Bob Brown','bob@gmail.com',
+        '$2a$10$fD9xnoa79VVhWkyGAnHyHexGXCsc7kIBSD.fBaX/9p3olPS137x1a');
 
-INSERT INTO tb_user(id,name,email,password)
-VALUES (1,'Bob Brown','bob@gmail.com','$2a$10$Dow1l6v8P2d6z5P9NQh9QeV7M6yKX6uL3U7Ck9K0xXkzG3Z0z9G7a');
-
-INSERT INTO tb_user(id,name,email,password)
-VALUES (2,'Ana Silva','ana@gmail.com','$2a$10$Dow1l6v8P2d6z5P9NQh9QeV7M6yKX6uL3U7Ck9K0xXkzG3Z0z9G7a');
+INSERT INTO tb_user(name,email,password)
+VALUES ('Ana Silva','ana@gmail.com',
+        '$2a$10$fD9xnoa79VVhWkyGAnHyHexGXCsc7kIBSD.fBaX/9p3olPS137x1a');
 
 INSERT INTO tb_user_role(user_id,role_id) VALUES (1,1);
 INSERT INTO tb_user_role(user_id,role_id) VALUES (2,2);
