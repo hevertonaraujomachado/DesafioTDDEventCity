@@ -1,29 +1,22 @@
 🏙️ Event City API
 
 
+
 REST API desenvolvida com Java + Spring Boot para gerenciamento de eventos e cidades, com autenticação OAuth2, validação de dados e controle de acesso baseado em roles.
-
 Projeto desenvolvido com foco em:
-
-Arquitetura limpa
-
-Segurança com Spring Security
-
-Test Driven Development (TDD)
-
-Boas práticas de API REST
+    • Arquitetura limpa
+    • Segurança com Spring Security
+    • Test Driven Development (TDD)
+    • Booas práticas de API REST
 
 🚀 Visão Geral
-
 O sistema permite gerenciar:
-
-Cidades
-
-Eventos
-
+    • Cidades
+    • Eventos
 Cada evento pertence a uma cidade.
 
 City (1) -------- (N) Event
+
 🏗️ Arquitetura da Aplicação
 
 A aplicação segue arquitetura em camadas:
@@ -38,13 +31,13 @@ Repository
    ↓
 Database
 
-Responsabilidades:
+| Camada     | Responsabilidade         |
+| ---------- | ------------------------ |
+| Controller | Receber requisições HTTP |
+| Service    | Regras de negócio        |
+| Repository | Acesso ao banco          |
+| Entity     | Modelo de domínio        |
 
-Camada	Responsabilidade
-Controller	Receber requisições HTTP
-Service	Regras de negócio
-Repository	Acesso ao banco
-Entity	Modelo de domínio
 🧩 Modelo de Domínio
 City
 Campo	Tipo
