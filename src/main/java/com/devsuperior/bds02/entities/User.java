@@ -1,10 +1,9 @@
 package com.devsuperior.bds02.entities;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,95 +17,55 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-@SuppressWarnings("serial")
+
+@Setter
 @Entity
 @Table(name = "tb_user")
 public class User implements UserDetails {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    @Getter
+    private String firstName;
+    @Getter
+    private String lastName;
 
+    @Getter
     @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
 
+    @Getter
     @ManyToMany
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    public User() {
+
     }
 
-    public void setId(Long id) {
+    public User(Long id, String firstName, String lastName, String email, String password, Set<Role> roles) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void addRole(Role role) {
-        roles.add(role);
-    }
-
-    public boolean hasRole(String roleName) {
-        for (Role role : roles) {
-            if (role.getAuthority().equals(roleName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        return Objects.equals(id, other.id);
+        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -133,5 +92,26 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(id);
+        result = 31 * result + Objects.hashCode(firstName);
+        result = 31 * result + Objects.hashCode(lastName);
+        result = 31 * result + Objects.hashCode(email);
+        result = 31 * result + Objects.hashCode(password);
+        result = 31 * result + Objects.hashCode(roles);
+        return result;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+}

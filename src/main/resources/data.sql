@@ -1,15 +1,11 @@
-INSERT INTO tb_role(authority) VALUES ('ROLE_ADMIN');
-INSERT INTO tb_role(authority) VALUES ('ROLE_CLIENT');
-INSERT INTO tb_user(name,email,password)
-VALUES ('Bob Brown','bob@gmail.com',
-        '$2a$10$fD9xnoa79VVhWkyGAnHyHexGXCsc7kIBSD.fBaX/9p3olPS137x1a');
+INSERT INTO tb_user(first_name, last_name, email, password) VALUES ('Ana', 'Silva', 'ana@gmail.com', '$2a$10$bkAxNY5LyZYcv5lUpgOKSuYJb8qiU/0WdWwOkOsx948ezSkaLvdy.');
+INSERT INTO tb_user(first_name, last_name, email, password) VALUES ('Bob', 'Brown', 'bob@gmail.com', '$2a$10$bkAxNY5LyZYcv5lUpgOKSuYJb8qiU/0WdWwOkOsx948ezSkaLvdy.');
 
-INSERT INTO tb_user(name,email,password)
-VALUES ('Ana Silva','ana@gmail.com',
-        '$2a$10$fD9xnoa79VVhWkyGAnHyHexGXCsc7kIBSD.fBaX/9p3olPS137x1a');
+INSERT INTO tb_role (authority) VALUES ('ROLE_CLIENT');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 
-INSERT INTO tb_user_role(user_id,role_id) VALUES (1,1);
-INSERT INTO tb_user_role(user_id,role_id) VALUES (2,2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
 
 INSERT INTO tb_city(name) VALUES ('São Paulo');
 INSERT INTO tb_city(name) VALUES ('Brasília');
@@ -23,7 +19,7 @@ INSERT INTO tb_city(name) VALUES ('Porto Alegre');
 INSERT INTO tb_city(name) VALUES ('Rio de Janeiro');
 INSERT INTO tb_city(name) VALUES ('Belo Horizonte');
 
-INSERT INTO tb_event(name,date,url,city_id) VALUES ('Feira do Software','2099-05-16','https://feiradosoftware.com',1);
-INSERT INTO tb_event(name,date,url,city_id) VALUES ('CCXP','2099-04-13','https://ccxp.com.br',1);
-INSERT INTO tb_event(name,date,url,city_id) VALUES ('Congresso Linux','2099-05-23','https://congressolinux.com.br',2);
-INSERT INTO tb_event(name,date,url,city_id) VALUES ('Semana Spring React','2099-05-03','https://devsuperior.com.br',3);
+INSERT INTO tb_event(name, date, url, city_id) VALUES ('Feira do Software', '2021-05-16', 'https://feiradosoftware.com', 1);
+INSERT INTO tb_event(name, date, url, city_id) VALUES ('CCXP', '2021-04-13', 'https://ccxp.com.br', 1);
+INSERT INTO tb_event(name, date, url, city_id) VALUES ('Congresso Linux', '2021-05-23', 'https://congressolinux.com.br', 2);
+INSERT INTO tb_event(name, date, url, city_id) VALUES ('Semana Spring React', '2021-05-03', 'https://devsuperior.com.br', 3);
